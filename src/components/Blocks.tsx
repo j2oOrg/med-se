@@ -22,14 +22,45 @@ type ImageProps = {
   loading?: 'eager' | 'lazy';
 };
 
+function fallbackInitials(value: string) {
+  const words = value
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-zA-Z0-9\s-]/g, ' ')
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean);
+
+  if (words.length === 0) {
+    return 'MED';
+  }
+
+  if (words.length === 1 && words[0].length <= 4) {
+    return words[0].toUpperCase();
+  }
+
+  return words
+    .slice(0, 2)
+    .map((word) => word[0])
+    .join('')
+    .toUpperCase();
+}
+
 export function OriginalImage({ src, alt, className = '', fallback, loading = 'lazy' }: ImageProps) {
   const [failed, setFailed] = useState(false);
   const usableSrc = src && !failed ? src : '';
 
   if (!usableSrc) {
+    const fallbackLabel = fallback || alt;
+    const initials = fallbackInitials(fallbackLabel);
+
     return (
-      <div className={`image-fallback ${className}`} aria-label={alt}>
-        <span>{fallback || alt.slice(0, 2).toUpperCase()}</span>
+      <div className={`image-fallback ${className}`} aria-label={alt} data-initials={initials}>
+        <span className="fallback-initials" aria-hidden="true">
+          {initials}
+        </span>
+        <span className="fallback-eyebrow">MED</span>
+        <span className="fallback-label">{fallbackLabel}</span>
       </div>
     );
   }

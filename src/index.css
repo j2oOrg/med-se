@@ -530,15 +530,125 @@ blockquote {
 }
 
 .image-fallback {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 8px;
+  padding: 22px;
+  text-align: center;
   color: #ffffff;
-  background: var(--green);
+  background:
+    radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.2), transparent 26%),
+    radial-gradient(circle at 82% 24%, rgba(185, 135, 36, 0.28), transparent 30%),
+    linear-gradient(135deg, #1f6d4b 0%, #17543c 52%, #183f39 100%);
 }
 
-.image-fallback span {
+.image-fallback::before {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  z-index: -1;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: calc(var(--radius) - 2px);
+}
+
+.image-fallback::after {
+  content: "";
+  position: absolute;
+  inset: auto -28px -42px auto;
+  z-index: -1;
+  width: 150px;
+  height: 150px;
+  border: 24px solid rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+}
+
+.fallback-initials {
+  position: absolute;
+  right: 14px;
+  bottom: -18px;
+  z-index: -1;
+  color: rgba(255, 255, 255, 0.12);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 82px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.fallback-eyebrow {
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 12px;
   font-weight: 950;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.fallback-label {
+  max-width: 88%;
+  font-size: 17px;
+  font-weight: 950;
+  line-height: 1.2;
+}
+
+.policy-card:nth-child(3n + 2) .image-fallback {
+  background:
+    radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.18), transparent 26%),
+    radial-gradient(circle at 80% 22%, rgba(184, 50, 43, 0.24), transparent 31%),
+    linear-gradient(135deg, #204f6f 0%, #1b5c55 48%, #1d4f37 100%);
+}
+
+.policy-card:nth-child(3n + 3) .image-fallback {
+  background:
+    radial-gradient(circle at 16% 18%, rgba(255, 255, 255, 0.2), transparent 28%),
+    radial-gradient(circle at 80% 18%, rgba(185, 135, 36, 0.34), transparent 32%),
+    linear-gradient(135deg, #6d2722 0%, #7a4b25 45%, #246b4a 100%);
+}
+
+.portrait-image.image-fallback {
+  background:
+    radial-gradient(circle at 50% 32%, rgba(255, 255, 255, 0.94) 0 16%, transparent 17%),
+    radial-gradient(ellipse at 50% 72%, rgba(255, 255, 255, 0.42) 0 19%, transparent 20%),
+    linear-gradient(160deg, #f5efe2 0%, #dfe7df 45%, #246b4a 100%);
+}
+
+.portrait-image.image-fallback::before {
+  inset: 12px;
+  border-color: rgba(255, 255, 255, 0.52);
+}
+
+.portrait-image.image-fallback::after {
+  right: -38px;
+  bottom: -48px;
+  border-color: rgba(36, 107, 74, 0.14);
+}
+
+.portrait-image.image-fallback .fallback-initials {
+  position: relative;
+  right: auto;
+  bottom: auto;
+  z-index: 1;
+  display: grid;
+  width: min(46%, 112px);
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid rgba(36, 107, 74, 0.18);
+  border-radius: 50%;
+  color: var(--green);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 16px 32px rgba(24, 27, 33, 0.16);
+  font-family: Inter, Ubuntu, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 34px;
+  font-weight: 950;
+  opacity: 1;
+}
+
+.portrait-image.image-fallback .fallback-eyebrow,
+.portrait-image.image-fallback .fallback-label {
+  display: none;
 }
 
 .promise-list {
