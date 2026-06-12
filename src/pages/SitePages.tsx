@@ -120,7 +120,7 @@ export function HomePage() {
   const topEvents = upcomingEvents.slice(0, 3);
 
   return (
-    <>
+    <div className="home-page campaign-home">
       <section className="home-hero">
         <OriginalImage
           src={hero?.image_url}
@@ -163,33 +163,58 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="content-section split-section">
-        <div>
-          <SectionIntro kicker="Valfrågor" title="Sverige behöver handlingskraft">
+      <section className="content-section campaign-section">
+        <div className="campaign-copy">
+          <SectionIntro kicker="Omstartspartiet" title="Mindre politikermakt. Mer ansvar där det räknas.">
             <p>
-              MED fokuserar på reformer som går att genomföra: mindre byråkrati, tryggare gator, bättre villkor för
-              arbete och företagande samt ett samhälle där medborgarnas frihet respekteras.
+              MED vill kapa skatteslöseriet, riva onödig byråkrati och flytta politiken tillbaka till kärnuppgifterna:
+              trygghet, vård, skola, försvar och respekt för den enskilde.
             </p>
           </SectionIntro>
-          <div className="promise-list">
-            {tables.valloften
-              .filter((promise) => promise.is_active)
-              .slice(0, 8)
-              .map((promise) => (
-                <article key={promise.id} className="promise-item">
-                  <span>{promise.order_index}</span>
-                  <h3>{promise.title}</h3>
-                </article>
-              ))}
+          <p>
+            Det är en konservativ och borgerlig omstart med fokus på fungerande institutioner, lägre bördor för arbete
+            och företagande och mer makt över den egna vardagen.
+          </p>
+          <div className="campaign-actions">
+            <HeroActions />
           </div>
         </div>
-        <div className="statement-panel">
-          <Shield size={34} />
-          <h2>Frihet, trygghet och framtidstro</h2>
+        <div className="campaign-pillar-grid">
+          <article className="campaign-pillar">
+            <HandCoins size={24} />
+            <h3>Kapa slöseriet</h3>
+            <p>Offentliga pengar ska gå till kärnuppgifter, inte byråkrati, bidragsfusk och prestigeprojekt.</p>
+          </article>
+          <article className="campaign-pillar">
+            <Shield size={24} />
+            <h3>Återupprätta tryggheten</h3>
+            <p>Lagar ska upprätthållas, brott få konsekvenser och staten stå på laglydiga medborgares sida.</p>
+          </article>
+          <article className="campaign-pillar">
+            <Landmark size={24} />
+            <h3>Ge makten tillbaka</h3>
+            <p>Mindre pekpinnar och mer ansvar nära människor, familjer, företag och lokalsamhällen.</p>
+          </article>
+        </div>
+      </section>
+
+      <section className="content-section pledge-section">
+        <SectionIntro kicker="Valfrågor" title="Reformer som går att genomföra">
           <p>
-            Politiken ska tillbaka till kärnuppgifterna: rättsstat, skola, försvar, fungerande välfärd och respekt för
-            den enskilde.
+            Handlingskraften i originalets valfrågor är tydlig: bekämpa slöseri, stärk rättsstaten och skapa bättre
+            villkor för arbete, företagande och ansvarstagande.
           </p>
+        </SectionIntro>
+        <div className="promise-list promise-list-featured">
+          {tables.valloften
+            .filter((promise) => promise.is_active)
+            .slice(0, 8)
+            .map((promise) => (
+              <article key={promise.id} className="promise-item">
+                <span>{promise.order_index}</span>
+                <h3>{promise.title}</h3>
+              </article>
+            ))}
         </div>
       </section>
 
@@ -205,7 +230,7 @@ export function HomePage() {
       </section>
 
       {whyMed ? (
-        <section className="content-section split-section reverse">
+        <section className="content-section split-section reverse why-section">
           <OriginalImage
             src={whyMed.image_url || heroFor('about')?.image_url}
             alt={whyMed.title}
@@ -240,16 +265,17 @@ export function HomePage() {
           <CtaLink to="/aktuellt">Allt aktuellt</CtaLink>
         </div>
       </section>
-    </>
+    </div>
   );
 }
 
 export function PoliticsPage() {
-  const hero = heroFor('riksdagslistan') ?? heroFor('home');
+  const hero =
+    homeHeroes().find((item) => item.alt_text?.toLowerCase().includes('ek')) ?? heroFor('about') ?? heroFor('home');
   const generalPolicies = tables.policies.filter((policy) => policy.type !== 'primär');
 
   return (
-    <>
+    <div className="page-theme politics-theme">
       <PageHero
         eyebrow="Vår politik"
         title="Politik för ett friare och tryggare Sverige"
@@ -273,7 +299,7 @@ export function PoliticsPage() {
           ))}
         </div>
       </section>
-    </>
+    </div>
   );
 }
 
@@ -286,7 +312,7 @@ export function PolicyDetailPage() {
   }
 
   return (
-    <>
+    <div className="page-theme politics-theme">
       <PageHero
         eyebrow={policy.type || 'Politik'}
         title={policy.title}
@@ -319,7 +345,7 @@ export function PolicyDetailPage() {
           </div>
         </section>
       ) : null}
-    </>
+    </div>
   );
 }
 
@@ -336,7 +362,7 @@ export function PeoplePage() {
   }, [normalizedQuery]);
 
   return (
-    <>
+    <div className="page-theme people-theme">
       <PageHero
         eyebrow="Våra politiker"
         title="Människorna bakom MED"
@@ -395,7 +421,7 @@ export function PeoplePage() {
           })}
         </div>
       </section>
-    </>
+    </div>
   );
 }
 
@@ -448,7 +474,7 @@ export function PersonDetailPage() {
   const assignments = assignmentsForPolitician(politician.id);
 
   return (
-    <>
+    <div className="page-theme people-theme">
       <PageHero
         eyebrow="Politiker"
         title={politician.name}
@@ -485,7 +511,7 @@ export function PersonDetailPage() {
           </div>
         </aside>
       </section>
-    </>
+    </div>
   );
 }
 
@@ -493,7 +519,7 @@ export function RiksdagsListPage() {
   const hero = heroFor('riksdagslistan') ?? heroFor('politicians');
 
   return (
-    <>
+    <div className="page-theme people-theme">
       <PageHero
         eyebrow="Riksdagslistan"
         title="Kandidater till riksdagen"
@@ -520,7 +546,7 @@ export function RiksdagsListPage() {
           ))}
         </div>
       </section>
-    </>
+    </div>
   );
 }
 
@@ -543,7 +569,7 @@ export function RiksCandidatePage() {
   ];
 
   return (
-    <>
+    <div className="page-theme people-theme">
       <PageHero
         eyebrow={`Plats ${candidate.position}`}
         title={candidate.name}
@@ -562,7 +588,7 @@ export function RiksCandidatePage() {
           ) : null,
         )}
       </section>
-    </>
+    </div>
   );
 }
 
@@ -570,7 +596,7 @@ export function DistrictsPage() {
   const hero = heroFor('municipalities') ?? heroFor('home');
 
   return (
-    <>
+    <div className="page-theme local-theme">
       <PageHero
         eyebrow="Distrikt och kommuner"
         title="MED finns lokalt i hela Sverige"
@@ -611,7 +637,7 @@ export function DistrictsPage() {
           })}
         </div>
       </section>
-    </>
+    </div>
   );
 }
 
@@ -629,7 +655,7 @@ export function DistrictDetailPage() {
   const districtPosts = postsForDistrict(district.id).slice(0, 4);
 
   return (
-    <>
+    <div className="page-theme local-theme">
       <PageHero
         eyebrow="Distrikt"
         title={districtDisplayName(district)}
@@ -707,7 +733,7 @@ export function DistrictDetailPage() {
           </div>
         </section>
       ) : null}
-    </>
+    </div>
   );
 }
 
@@ -754,7 +780,7 @@ export function MunicipalityDetailPage() {
   const blocks = contentBlocksForMunicipality(municipality.id);
 
   return (
-    <>
+    <div className="page-theme local-theme">
       <PageHero
         eyebrow={districtDisplayName(district)}
         title={municipality.display_name || municipality.name}
@@ -814,7 +840,7 @@ export function MunicipalityDetailPage() {
           </div>
         </section>
       ) : null}
-    </>
+    </div>
   );
 }
 
@@ -823,7 +849,7 @@ export function EventsPage() {
   const pastEvents = eventPosts.filter((post) => !upcomingEvents.includes(post)).slice(0, 12);
 
   return (
-    <>
+    <div className="page-theme events-theme">
       <PageHero
         eyebrow="Evenemang"
         title="Träffa Medborgerlig Samling"
@@ -849,7 +875,7 @@ export function EventsPage() {
           </div>
         </section>
       ) : null}
-    </>
+    </div>
   );
 }
 
@@ -857,7 +883,7 @@ export function AktuelltPage() {
   const hero = heroFor('aktuellt');
 
   return (
-    <>
+    <div className="page-theme news-theme">
       <PageHero
         eyebrow="Aktuellt"
         title="Nyheter och pressmeddelanden"
@@ -872,7 +898,7 @@ export function AktuelltPage() {
           ))}
         </div>
       </section>
-    </>
+    </div>
   );
 }
 

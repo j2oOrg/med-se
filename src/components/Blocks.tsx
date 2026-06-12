@@ -1,6 +1,19 @@
 import { useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, CalendarDays, ExternalLink, MapPin } from 'lucide-react';
+import {
+  ArrowRight,
+  BriefcaseBusiness,
+  CalendarDays,
+  ExternalLink,
+  GraduationCap,
+  HeartPulse,
+  Home,
+  Landmark,
+  MapPin,
+  Scale,
+  ShieldCheck,
+  Trees,
+} from 'lucide-react';
 import {
   excerpt,
   formatDate,
@@ -44,6 +57,76 @@ function fallbackInitials(value: string) {
     .map((word) => word[0])
     .join('')
     .toUpperCase();
+}
+
+type PolicyIconKind = 'shield' | 'scale' | 'work' | 'school' | 'care' | 'home' | 'nature' | 'state';
+
+function policyIconKindFor(policy: Policy): PolicyIconKind {
+  const text = `${policy.title} ${policy.description || ''} ${policy.content || ''}`.toLowerCase();
+
+  if (text.includes('trygg') || text.includes('brott') || text.includes('rätts')) {
+    return 'shield';
+  }
+
+  if (text.includes('frihet') || text.includes('demokrati')) {
+    return 'scale';
+  }
+
+  if (text.includes('skatt') || text.includes('företag') || text.includes('arbete') || text.includes('jobb')) {
+    return 'work';
+  }
+
+  if (text.includes('skola') || text.includes('universitet') || text.includes('utbild')) {
+    return 'school';
+  }
+
+  if (text.includes('vård') || text.includes('omsorg')) {
+    return 'care';
+  }
+
+  if (text.includes('bostad') || text.includes('kommun')) {
+    return 'home';
+  }
+
+  if (text.includes('miljö') || text.includes('energi') || text.includes('natur')) {
+    return 'nature';
+  }
+
+  return 'state';
+}
+
+function PolicyGlyph({ policy }: { policy: Policy }) {
+  const kind = policyIconKindFor(policy);
+
+  if (kind === 'shield') {
+    return <ShieldCheck size={24} />;
+  }
+
+  if (kind === 'scale') {
+    return <Scale size={24} />;
+  }
+
+  if (kind === 'work') {
+    return <BriefcaseBusiness size={24} />;
+  }
+
+  if (kind === 'school') {
+    return <GraduationCap size={24} />;
+  }
+
+  if (kind === 'care') {
+    return <HeartPulse size={24} />;
+  }
+
+  if (kind === 'home') {
+    return <Home size={24} />;
+  }
+
+  if (kind === 'nature') {
+    return <Trees size={24} />;
+  }
+
+  return <Landmark size={24} />;
 }
 
 export function OriginalImage({ src, alt, className = '', fallback, loading = 'lazy' }: ImageProps) {
@@ -145,8 +228,13 @@ export function ExternalCta({ href, children }: { href: string; children: ReactN
 export function PolicyCard({ policy }: { policy: Policy }) {
   return (
     <Link to={policyUrl(policy)} className="policy-card">
-      <OriginalImage src={policy.featured_image} alt={policy.title} className="card-image" fallback={policy.title} />
-      <div>
+      <div className="policy-media">
+        <OriginalImage src={policy.featured_image} alt={policy.title} className="card-image" fallback={policy.title} />
+        <span className="policy-card-icon" aria-hidden="true">
+          <PolicyGlyph policy={policy} />
+        </span>
+      </div>
+      <div className="policy-card-body">
         <p className="kicker">{policy.type || 'Politik'}</p>
         <h3>{policy.title}</h3>
         <p>{excerpt(policy.description || policy.content, 132)}</p>

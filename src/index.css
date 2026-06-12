@@ -335,6 +335,113 @@ blockquote {
   font-weight: 950;
 }
 
+.campaign-section {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1fr);
+  gap: 34px;
+  align-items: stretch;
+  padding-top: 92px;
+}
+
+.campaign-copy {
+  position: relative;
+  overflow: hidden;
+  padding: 36px;
+  border-left: 6px solid var(--red);
+  border-radius: var(--radius);
+  color: #ffffff;
+  background:
+    linear-gradient(135deg, rgba(184, 50, 43, 0.28), transparent 42%),
+    linear-gradient(145deg, #181b21 0%, #20272d 55%, #153b2f 100%);
+}
+
+.campaign-copy::after {
+  content: "MED";
+  position: absolute;
+  right: -12px;
+  bottom: -28px;
+  color: rgba(255, 255, 255, 0.08);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 112px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.campaign-copy h2,
+.campaign-copy p,
+.campaign-copy .kicker {
+  color: #ffffff;
+}
+
+.campaign-copy > p {
+  position: relative;
+  z-index: 1;
+  max-width: 620px;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.campaign-actions {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.campaign-pillar-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.campaign-pillar {
+  display: grid;
+  grid-template-columns: 46px 1fr;
+  gap: 16px;
+  align-items: start;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper);
+}
+
+.campaign-pillar svg {
+  padding: 9px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  color: #ffffff;
+  background: var(--green);
+}
+
+.campaign-pillar:nth-child(2) svg {
+  background: var(--red);
+}
+
+.campaign-pillar:nth-child(3) svg {
+  background: var(--blue);
+}
+
+.campaign-pillar p {
+  grid-column: 2;
+  margin-top: 6px;
+}
+
+.pledge-section {
+  padding-top: 38px;
+}
+
+.promise-list-featured {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.promise-list-featured .promise-item {
+  min-height: 96px;
+  background:
+    linear-gradient(90deg, rgba(29, 78, 137, 0.06), transparent 34%),
+    var(--paper);
+}
+
 .content-section,
 .plain-page {
   max-width: var(--content);
@@ -411,7 +518,87 @@ blockquote {
   height: 100%;
   min-height: 360px;
   object-fit: cover;
+  object-position: center;
   border-radius: var(--radius);
+}
+
+.page-theme {
+  --theme-accent: var(--red);
+  --theme-ink: var(--ink);
+  --theme-soft: #f8f7f4;
+  background: linear-gradient(180deg, var(--theme-soft) 0, #ffffff 420px);
+}
+
+.politics-theme {
+  --theme-accent: var(--red);
+  --theme-ink: #1d2028;
+  --theme-soft: #fbf4f2;
+}
+
+.people-theme {
+  --theme-accent: var(--green);
+  --theme-ink: #14231f;
+  --theme-soft: #f2f8f5;
+}
+
+.local-theme {
+  --theme-accent: var(--blue);
+  --theme-ink: #142638;
+  --theme-soft: #f2f7fb;
+}
+
+.events-theme {
+  --theme-accent: var(--gold);
+  --theme-ink: #252018;
+  --theme-soft: #fbf7ed;
+}
+
+.news-theme {
+  --theme-accent: var(--red);
+  --theme-ink: #21181a;
+  --theme-soft: #fbf4f3;
+}
+
+.page-theme .page-hero-copy {
+  border-left: 6px solid var(--theme-accent);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--theme-accent) 24%, transparent), transparent 46%),
+    var(--theme-ink);
+}
+
+.page-theme .page-hero-copy .kicker,
+.page-theme .page-hero-copy h1,
+.page-theme .page-hero-copy p {
+  color: #ffffff;
+}
+
+.page-theme .content-section .kicker,
+.page-theme .section-intro .kicker {
+  color: var(--theme-accent);
+}
+
+.people-theme .page-hero-image,
+.people-theme .portrait-image {
+  object-position: 50% 24%;
+}
+
+.local-theme .district-card {
+  border-left: 4px solid var(--blue);
+}
+
+.events-theme .post-card {
+  border-top: 4px solid var(--gold);
+}
+
+.news-theme .post-card {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.75fr) minmax(0, 1fr);
+}
+
+.news-theme .post-card .card-image {
+  height: 100%;
+  min-height: 210px;
+  aspect-ratio: auto;
 }
 
 .feature-image {
@@ -471,7 +658,7 @@ blockquote {
   box-shadow: 0 16px 36px rgba(24, 27, 33, 0.12);
 }
 
-.policy-card > div,
+.policy-card-body,
 .district-card > div,
 .post-card-body {
   padding: 18px;
@@ -488,6 +675,34 @@ blockquote {
   aspect-ratio: 16 / 10;
   object-fit: cover;
   background: var(--field);
+}
+
+.policy-media {
+  position: relative;
+  overflow: hidden;
+}
+
+.policy-card-icon {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  display: grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  border-radius: 50%;
+  color: #ffffff;
+  background: rgba(24, 27, 33, 0.44);
+  backdrop-filter: blur(10px);
+}
+
+.policy-card .image-fallback {
+  min-height: 100%;
+}
+
+.policy-card .fallback-label {
+  font-size: 18px;
 }
 
 .card-more {
@@ -526,6 +741,7 @@ blockquote {
   width: 100%;
   aspect-ratio: 4 / 5;
   object-fit: cover;
+  object-position: 50% 26%;
   background: var(--field);
 }
 
@@ -583,7 +799,7 @@ blockquote {
   color: rgba(255, 255, 255, 0.74);
   font-size: 12px;
   font-weight: 950;
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
@@ -967,8 +1183,23 @@ audio {
 
   .page-hero,
   .split-section,
-  .split-section.reverse {
+  .split-section.reverse,
+  .campaign-section {
     grid-template-columns: 1fr;
+  }
+
+  .promise-list-featured {
+    grid-template-columns: 1fr;
+  }
+
+  .news-theme .post-card {
+    grid-template-columns: 1fr;
+  }
+
+  .news-theme .post-card .card-image {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 16 / 10;
   }
 
   .page-hero-copy,
@@ -991,11 +1222,11 @@ audio {
 
 @media (max-width: 720px) {
   h1 {
-    font-size: 40px;
+    font-size: 38px;
   }
 
   h2 {
-    font-size: 27px;
+    font-size: 26px;
   }
 
   .site-header {
@@ -1029,30 +1260,112 @@ audio {
   }
 
   .home-hero {
-    min-height: 620px;
+    min-height: 560px;
   }
 
   .home-hero-overlay {
-    padding: 0 20px 48px;
+    padding: 0 20px 40px;
+  }
+
+  .home-hero h1 {
+    font-size: 39px;
   }
 
   .home-hero p {
-    font-size: 18px;
+    font-size: 17px;
   }
 
   .content-section,
   .plain-page,
   .page-hero {
+    padding-top: 48px;
     padding-right: 18px;
+    padding-bottom: 48px;
     padding-left: 18px;
   }
 
+  .page-hero {
+    gap: 16px;
+  }
+
   .page-hero-copy {
-    padding: 24px;
+    min-height: auto;
+    padding: 22px;
   }
 
   .page-hero-copy h1 {
-    font-size: 38px;
+    font-size: 36px;
+  }
+
+  .page-hero-copy p {
+    font-size: 16px;
+  }
+
+  .page-hero-image {
+    min-height: 238px;
+  }
+
+  .campaign-section {
+    padding-top: 52px;
+  }
+
+  .campaign-copy {
+    padding: 24px;
+  }
+
+  .campaign-copy::after {
+    font-size: 78px;
+  }
+
+  .campaign-actions,
+  .hero-actions {
+    gap: 10px;
+  }
+
+  .campaign-pillar {
+    grid-template-columns: 40px 1fr;
+    gap: 13px;
+    padding: 16px;
+  }
+
+  .campaign-pillar svg {
+    width: 38px;
+    height: 38px;
+  }
+
+  .section-intro {
+    margin-bottom: 22px;
+  }
+
+  .card-grid,
+  .person-grid,
+  .promise-list,
+  .stack-list {
+    gap: 16px;
+  }
+
+  .policy-card-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .policy-card-body,
+  .district-card > div,
+  .post-card-body,
+  .person-card > div {
+    padding: 16px;
+  }
+
+  .person-card h3,
+  .policy-card h3,
+  .district-card h3,
+  .post-card h3 {
+    font-size: 19px;
+  }
+
+  .person-grid.compact .portrait-image {
+    aspect-ratio: 4 / 3;
+    object-position: 50% 24%;
   }
 
   .metric-band,
