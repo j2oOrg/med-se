@@ -1,9 +1,16 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
-import { HandCoins, Mail, Menu, X } from 'lucide-react';
+import { ExternalLink, HandCoins, Mail, Menu, Settings, X } from 'lucide-react';
+import { CookieConsent } from './CookieConsent';
+import { ElectionHub } from './ElectionHub';
+import { NewsletterSignup } from './NewsletterSignup';
+import { Seo } from './Seo';
 import { siteSource } from '../lib/med-data';
+import { openCookieSettings } from '../lib/cookie-settings';
+import { socialLinks } from '../lib/site-meta';
 
 const navItems = [
+  { label: 'Val 2026', to: '/val-2026' },
   { label: 'Politik', to: '/politik' },
   { label: 'Politiker', to: '/politiker' },
   { label: 'Distrikt', to: '/distrikt' },
@@ -26,6 +33,7 @@ export function SiteLayout() {
 
   return (
     <div className="site-shell">
+      <Seo />
       <header className="site-header">
         <Link to="/" className="brand" aria-label="Medborgerlig Samling">
           <img src="https://www.med.se/logo.png" alt="" />
@@ -75,6 +83,9 @@ export function SiteLayout() {
         <Outlet />
       </main>
 
+      <NewsletterSignup compact className="footer-newsletter" />
+      <ElectionHub compact className="footer-election-hub" />
+
       <footer className="site-footer">
         <div>
           <Link to="/" className="footer-brand">
@@ -88,12 +99,26 @@ export function SiteLayout() {
           <Link to="/alla-ska-med">Alla ska MED</Link>
           <Link to="/granskningsgruppen">Granskningsgruppen</Link>
           <Link to="/integritetspolicy">Integritet</Link>
+          <Link to="/cookiepolicy">Cookiepolicy</Link>
+          <button type="button" className="footer-link-button" onClick={openCookieSettings}>
+            <Settings size={16} />
+            Cookieinställningar
+          </button>
           <a href="mailto:info@med.se">
             <Mail size={16} />
             info@med.se
           </a>
         </div>
+        <div className="footer-social" aria-label="Sociala kanaler">
+          {socialLinks.map((link) => (
+            <a key={link.href} href={link.href} target="_blank" rel="noreferrer">
+              {link.label}
+              <ExternalLink size={14} />
+            </a>
+          ))}
+        </div>
       </footer>
+      <CookieConsent />
     </div>
   );
 }

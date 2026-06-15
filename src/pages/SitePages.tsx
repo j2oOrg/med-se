@@ -29,6 +29,9 @@ import {
   PostCard,
   SectionIntro,
 } from '../components/Blocks';
+import { ElectionHub } from '../components/ElectionHub';
+import { NewsletterSignup } from '../components/NewsletterSignup';
+import { openCookieSettings } from '../lib/cookie-settings';
 import {
   assignmentsForDistrict,
   assignmentsForPolitician,
@@ -163,6 +166,9 @@ export function HomePage() {
         </div>
       </section>
 
+      <NewsletterSignup className="home-newsletter" />
+      <ElectionHub className="home-election-hub" />
+
       <section className="content-section campaign-section">
         <div className="campaign-copy">
           <SectionIntro kicker="Omstartspartiet" title="Mindre politikermakt. Mer ansvar där det räknas.">
@@ -265,6 +271,49 @@ export function HomePage() {
           <CtaLink to="/aktuellt">Allt aktuellt</CtaLink>
         </div>
       </section>
+    </div>
+  );
+}
+
+export function ElectionHubPage() {
+  const hero = heroFor('riksdagslistan') ?? heroFor('home');
+
+  return (
+    <div className="page-theme politics-theme election-page">
+      <PageHero
+        eyebrow="Val 2026"
+        title="Vägen till riksdagen 2026"
+        text="Här samlas MED:s valfrågor, riksdagskandidater, partiledarens budskap och granskningen av kommunal ekonomi inför valet."
+        image={hero?.image_url}
+        imageAlt={hero?.alt_text || 'Val 2026'}
+        actions={
+          <>
+            <CtaLink to="/riksdagslistan">Riksdagslistan</CtaLink>
+            <CtaLink to="/politik">Valfrågor</CtaLink>
+          </>
+        }
+      />
+      <ElectionHub className="election-page-hub" />
+      <section className="content-section pledge-section">
+        <SectionIntro kicker="Valfrågor" title="Det MED vill driva i valet">
+          <p>
+            Valrörelsen ska handla om fungerande kärnuppgifter, lägre slöseri, starkare rättsstat och mer ansvar där
+            människor lever sina liv.
+          </p>
+        </SectionIntro>
+        <div className="promise-list promise-list-featured">
+          {tables.valloften
+            .filter((promise) => promise.is_active)
+            .slice(0, 8)
+            .map((promise) => (
+              <article key={promise.id} className="promise-item">
+                <span>{promise.order_index}</span>
+                <h3>{promise.title}</h3>
+              </article>
+            ))}
+        </div>
+      </section>
+      <NewsletterSignup className="home-newsletter election-newsletter" />
     </div>
   );
 }
@@ -1263,6 +1312,11 @@ export function LegalPage({ page }: { page: 'integritetspolicy' | 'cookiepolicy'
         imageAlt={title}
       />
       <section className="content-section article-layout">
+        {page === 'cookiepolicy' ? (
+          <button type="button" className="secondary-button policy-settings-button" onClick={openCookieSettings}>
+            Öppna cookieinställningar
+          </button>
+        ) : null}
         {sections.map((section) => (
           <article key={section.id}>
             <h2>{section.title}</h2>

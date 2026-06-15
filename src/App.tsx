@@ -7,6 +7,7 @@ import {
   DistrictDetailPage,
   DistrictsPage,
   DonatePage,
+  ElectionHubPage,
   EventsPage,
   FreeStudentsPage,
   GranskningPage,
@@ -36,6 +37,7 @@ export default function App() {
       <Routes>
         <Route element={<SiteLayout />}>
           <Route index element={<HomePage />} />
+          <Route path="val-2026" element={<ElectionHubPage />} />
           <Route path="politik" element={<PoliticsPage />} />
           <Route path="politik/lista" element={<RedirectToPolitics />} />
           <Route path="politik/sammanfattning" element={<RedirectToPolitics />} />
