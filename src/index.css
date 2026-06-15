@@ -233,15 +233,26 @@ blockquote {
 
 .site-footer {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(240px, auto) minmax(190px, auto);
-  gap: 32px;
+  grid-template-columns: minmax(260px, 0.85fr) minmax(420px, 1.45fr) minmax(260px, 0.8fr);
+  gap: 30px 42px;
+  align-items: start;
   padding: 42px max(24px, calc((100vw - var(--content)) / 2));
   color: #ffffff;
   background: var(--ink);
 }
 
+.footer-about {
+  min-width: 0;
+  max-width: 340px;
+}
+
 .site-footer p {
+  max-width: 310px;
   color: rgba(255, 255, 255, 0.72);
+}
+
+.footer-brand {
+  white-space: nowrap;
 }
 
 .source-note {
@@ -252,8 +263,8 @@ blockquote {
 .footer-links {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 16px;
+  justify-content: center;
+  gap: 12px 18px;
 }
 
 .footer-links a,
@@ -264,6 +275,8 @@ blockquote {
   gap: 6px;
   color: rgba(255, 255, 255, 0.82);
   font-weight: 800;
+  line-height: 1.35;
+  white-space: nowrap;
 }
 
 .footer-social {
@@ -271,7 +284,7 @@ blockquote {
   flex-wrap: wrap;
   justify-content: flex-end;
   align-content: start;
-  gap: 12px;
+  gap: 12px 14px;
 }
 
 .footer-link-button {
@@ -1433,6 +1446,10 @@ audio {
     box-shadow 160ms ease;
 }
 
+.election-link-grid a > span {
+  min-width: 0;
+}
+
 .election-link-grid a:hover {
   transform: translateY(-2px);
   border-color: rgba(29, 78, 137, 0.42);
@@ -1465,7 +1482,7 @@ audio {
 }
 
 .election-hub-compact .election-link-grid {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 }
 
 .election-hub-compact .election-link-grid a {
@@ -1684,6 +1701,19 @@ audio {
   .election-link-grid,
   .election-hub-compact .election-link-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .site-footer {
+    grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1fr);
+  }
+
+  .footer-about {
+    max-width: none;
+  }
+
+  .footer-links,
+  .footer-social {
+    justify-content: flex-start;
   }
 
   .cookie-banner {
@@ -1958,5 +1988,9 @@ audio {
   .footer-links,
   .footer-social {
     justify-content: flex-start;
+  }
+
+  .site-footer p {
+    max-width: none;
   }
 }

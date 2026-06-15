@@ -86,8 +86,8 @@ export function SiteLayout() {
       <NewsletterSignup compact className="footer-newsletter" />
       <ElectionHub compact className="footer-election-hub" />
 
-      <footer className="site-footer">
-        <div>
+      <footer className="site-footer" translate="no">
+        <div className="footer-about">
           <Link to="/" className="footer-brand">
             Medborgerlig Samling
           </Link>
