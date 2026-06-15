@@ -56,6 +56,16 @@ img {
   max-width: 100%;
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 h1,
 h2,
 h3,
@@ -284,7 +294,28 @@ blockquote {
   flex-wrap: wrap;
   justify-content: flex-end;
   align-content: start;
-  gap: 12px 14px;
+  gap: 10px;
+}
+
+.footer-social a {
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.86);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.footer-social a:hover {
+  border-color: rgba(255, 255, 255, 0.36);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.social-icon {
+  display: block;
+  flex: 0 0 auto;
 }
 
 .footer-link-button {
@@ -295,7 +326,6 @@ blockquote {
 }
 
 .footer-links a:hover,
-.footer-social a:hover,
 .footer-link-button:hover {
   color: #ffffff;
 }
@@ -990,6 +1020,20 @@ blockquote {
 .document-list a {
   color: var(--ink);
   font-weight: 850;
+}
+
+.info-list a.social-cta {
+  width: fit-content;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.info-list a.social-cta:hover {
+  border-color: rgba(29, 78, 137, 0.42);
+  box-shadow: 0 10px 22px rgba(24, 27, 33, 0.08);
 }
 
 .meta-row {

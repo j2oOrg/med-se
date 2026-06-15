@@ -31,6 +31,7 @@ import {
 } from '../components/Blocks';
 import { ElectionHub } from '../components/ElectionHub';
 import { NewsletterSignup } from '../components/NewsletterSignup';
+import { SocialIcon } from '../components/SocialIcon';
 import { openCookieSettings } from '../lib/cookie-settings';
 import {
   assignmentsForDistrict,
@@ -112,6 +113,17 @@ function HeroActions() {
       <CtaLink to="/medlemskap">Bli medlem</CtaLink>
       <CtaLink to="/politik">Läs vår politik</CtaLink>
     </>
+  );
+}
+
+function SocialCta({ href, label }: { href: string; label: string }) {
+  const displayLabel = label === 'X' ? 'Följ på X' : label;
+
+  return (
+    <a href={href} className="social-cta" target="_blank" rel="noopener noreferrer">
+      <SocialIcon label={label} size={18} />
+      <span>{displayLabel}</span>
+    </a>
   );
 }
 
@@ -313,7 +325,6 @@ export function ElectionHubPage() {
             ))}
         </div>
       </section>
-      <NewsletterSignup className="home-newsletter election-newsletter" />
     </div>
   );
 }
@@ -727,9 +738,10 @@ export function DistrictDetailPage() {
                 {district.contact_email}
               </a>
             ) : null}
-            {district.facebook_url ? <ExternalCta href={district.facebook_url}>Facebook</ExternalCta> : null}
-            {district.instagram_url ? <ExternalCta href={district.instagram_url}>Instagram</ExternalCta> : null}
-            {district.x_url ? <ExternalCta href={district.x_url}>X</ExternalCta> : null}
+            {district.facebook_url ? <SocialCta href={district.facebook_url} label="Facebook" /> : null}
+            {district.instagram_url ? <SocialCta href={district.instagram_url} label="Instagram" /> : null}
+            {district.youtube_url ? <SocialCta href={district.youtube_url} label="YouTube" /> : null}
+            {district.x_url ? <SocialCta href={district.x_url} label="X" /> : null}
           </div>
         </aside>
       </section>
@@ -738,7 +750,7 @@ export function DistrictDetailPage() {
           <SectionIntro kicker="Dokument" title="Lokala program" />
           <div className="document-list">
             {documents.map((document) => (
-              <a key={document.id} href={document.file_url} target="_blank" rel="noreferrer">
+              <a key={document.id} href={document.file_url} target="_blank" rel="noopener noreferrer">
                 <FileText size={18} />
                 <span>{document.title}</span>
               </a>
@@ -852,8 +864,10 @@ export function MunicipalityDetailPage() {
                 {municipality.contact_email}
               </a>
             ) : null}
-            {municipality.facebook_url ? <ExternalCta href={municipality.facebook_url}>Facebook</ExternalCta> : null}
-            {municipality.instagram_url ? <ExternalCta href={municipality.instagram_url}>Instagram</ExternalCta> : null}
+            {municipality.facebook_url ? <SocialCta href={municipality.facebook_url} label="Facebook" /> : null}
+            {municipality.instagram_url ? <SocialCta href={municipality.instagram_url} label="Instagram" /> : null}
+            {municipality.youtube_url ? <SocialCta href={municipality.youtube_url} label="YouTube" /> : null}
+            {municipality.x_url ? <SocialCta href={municipality.x_url} label="X" /> : null}
           </div>
         </aside>
       </section>
@@ -865,7 +879,7 @@ export function MunicipalityDetailPage() {
           <SectionIntro kicker="Dokument" title="Lokala program" />
           <div className="document-list">
             {documents.map((document) => (
-              <a key={document.id} href={document.file_url} target="_blank" rel="noreferrer">
+              <a key={document.id} href={document.file_url} target="_blank" rel="noopener noreferrer">
                 <FileText size={18} />
                 <span>{document.title}</span>
               </a>
@@ -1157,7 +1171,7 @@ export function GranskningPage() {
                   <HtmlContent html={item.insats} />
                   <div className="document-list">
                     {links.map((link) => (
-                      <a key={link.id} href={link.url} target="_blank" rel="noreferrer">
+                      <a key={link.id} href={link.url} target="_blank" rel="noopener noreferrer">
                         <FileText size={18} />
                         {link.title}
                       </a>

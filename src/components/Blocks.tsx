@@ -218,7 +218,7 @@ export function CtaLink({ to, children }: { to: string; children: ReactNode }) {
 
 export function ExternalCta({ href, children }: { href: string; children: ReactNode }) {
   return (
-    <a href={href} className="cta-link" target="_blank" rel="noreferrer">
+    <a href={href} className="cta-link" target="_blank" rel="noopener noreferrer">
       <span>{children}</span>
       <ExternalLink size={18} />
     </a>

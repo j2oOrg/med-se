@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
-import { ExternalLink, HandCoins, Mail, Menu, Settings, X } from 'lucide-react';
+import { HandCoins, Mail, Menu, Settings, X } from 'lucide-react';
 import { CookieConsent } from './CookieConsent';
 import { ElectionHub } from './ElectionHub';
 import { NewsletterSignup } from './NewsletterSignup';
 import { Seo } from './Seo';
+import { SocialIcon } from './SocialIcon';
 import { siteSource } from '../lib/med-data';
 import { openCookieSettings } from '../lib/cookie-settings';
 import { socialLinks } from '../lib/site-meta';
@@ -111,9 +112,16 @@ export function SiteLayout() {
         </div>
         <div className="footer-social" aria-label="Sociala kanaler">
           {socialLinks.map((link) => (
-            <a key={link.href} href={link.href} target="_blank" rel="noreferrer">
-              {link.label}
-              <ExternalLink size={14} />
+            <a
+              key={link.href}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={link.label}
+              title={link.label}
+            >
+              <SocialIcon label={link.label} />
+              <span className="visually-hidden">{link.label}</span>
             </a>
           ))}
         </div>
